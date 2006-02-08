@@ -1,0 +1,25 @@
+\name{guiInputTask2}
+
+\alias{guiInputTask2}
+
+
+\title{ input for calculating Task 2 }
+
+\description{
+This function creates a GUI to get input for calculating Task 2
+}
+
+\usage{
+guiInputTask2()
+}
+
+\author{ Roman Pahl }
+
+\note{This function is meant to be called in context of using \code{\link{groupseq}}\cr
+      It won´t work on its own!}
+
+\seealso{ \code{\link{groupseq}}, \code{\link{guiInputTask1}} 
+          \code{\link{guiInputTask3}}, \code{\link{guiInputTask4}}}
+
+\keyword{methods}
+\keyword{IO}
