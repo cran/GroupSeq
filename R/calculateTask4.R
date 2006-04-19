@@ -1,6 +1,6 @@
 "calculateTask4" <-
 function(n,nMax,t,t2,t2max,t3,confidenceLevel,equallySpacedTimesInput,secondTimeScaleIsUsed, BoundsSymmetry, alpha, phi, usedFunction,TruncateBoundsInput,
-         enterBoundsManually, upperBounds, lowerBounds, Zvalue)
+         enterBoundsManually, upperBounds, lowerBounds, Zvalue, taskWindow)
 {
   ### did user enter bounds himself? otherwise they must be computed before we can go on with calculating the drift ###
   if(!enterBoundsManually)
@@ -9,6 +9,7 @@ function(n,nMax,t,t2,t2max,t3,confidenceLevel,equallySpacedTimesInput,secondTime
 
     if (!BoundsSymmetry==3)
     {
+      usedFunction[2]=usedFunction[1]
       results<- computeBounds(n, 0, alpha[1], phi[1], t, t2, BoundsSymmetry, usedFunction[1], TruncateBoundsInput)
     }
 
@@ -91,7 +92,7 @@ function(n,nMax,t,t2,t2max,t3,confidenceLevel,equallySpacedTimesInput,secondTime
                     
   ##output results 
   guiOutputTask4(n,confidenceLevel,secondTimeScaleIsUsed,t,t2,t2max,lowerBounds,upperBounds,BoundsSymmetry,
-                   enterBoundsManually,alpha,confidenceIntervall,usedFunction,Zvalue)
+                   enterBoundsManually,alpha,phi,confidenceIntervall,usedFunction,Zvalue, taskWindow)
                    
    
 }#end <--*function calculateTask4*

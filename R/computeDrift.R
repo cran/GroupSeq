@@ -1,8 +1,8 @@
 "computeDrift" <-
 function(n, t, t2, lowerBounds, upperBounds, target, drift, nMax)
 {
-  probStopping <-0 #is the probaility of reaching ith analysis and stopping.
-  probExceedingUpper<-0 # the probaility of reaching ith and exceeding upper.
+  probStopping <-0 #is the probability of reaching ith analysis and stopping.
+  probExceedingUpper<-0 # the probability of reaching ith and exceeding upper.
   probExceedingLower<-0 #is the probability of reaching ith and exceeding lower.
   probTotal<-0 #is the total probability of rejecting, sum(1,n)(probExceedingUpper+probExceedingLower)
   
@@ -18,7 +18,7 @@ function(n, t, t2, lowerBounds, upperBounds, target, drift, nMax)
 
   
   noError<-FALSE
-  ##we will need start value 'drift' again, in case Newton Iteration fails
+  ##backup start value 'drift', in case Newton Iteration fails
   saveDrift <-drift
 
   ##---------------------------------------------------------------------##
@@ -52,17 +52,16 @@ function(n, t, t2, lowerBounds, upperBounds, target, drift, nMax)
     fxkMinusOne <- abs( sum(vectorOfProbabilities)-target )
  
 
-    ## choose start point for iteration
+    ## Choose start point for iteration -
     ## the more interim analysis we have the closer we choose our startpoint to yb[i-1] 
-    ## which is done by yb[i-1]-epsilon
+    ## which is done by yb[i-1]-epsilon.
     
-    ## this choice leads to an average number of about 4 iterations to converge -
-    ## in case of equally spaced interim analysis it is mostly even better leading to about 3 iterations
+    ## This choice leads to an average number of about 4 iterations to converge -
+    ## in case of equally spaced interim analysis it is mostly even better leading to about 3 iterations.
     
-    ## in spite of that i would be fine with better choices 
-    ## if the Reader knows how to choose them
+    ## There may be better choices than that.
 
-    ## if we got very many interim analysis we have to limit our epsilon to 10^-10
+    ## If we got very many interim analysis we have to limit our epsilon to 10^-10
     if(numberOfInterimAnalysis > 10)
     {
       epsilon <- 10^(-10)
@@ -87,8 +86,8 @@ function(n, t, t2, lowerBounds, upperBounds, target, drift, nMax)
     ##number of loops with purpose of controlling convergence       
     numberOfLoops<-0
 
-    ## We do 20 iterations maximally - 
-    ## if we do not have finished then, we won´t have convergence at all
+    ## We do 20 iterations at maximum
+    ## if we do not have finished then, we won´t converge at all
     for (j in 1:20)
     {
       numberOfLoops <- j

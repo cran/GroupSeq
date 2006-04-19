@@ -22,3 +22,5 @@ function( mode=chosenMode )
          cat("Wrong call of groupseq() \n")
        }
 }
+
+.onAttach <- function(libname, pkgname) {groupseq()}

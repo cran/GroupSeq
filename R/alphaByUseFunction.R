@@ -3,7 +3,7 @@ function(whatSpendingFunctionIsUsed,n,alpha,phi,OneOrTwoSidedBounds,t)
 {
   ###Initialize variables###
   probExit<-0
-
+  
 
   #calculate probabilities according to use function
 

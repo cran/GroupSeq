@@ -1,5 +1,6 @@
 "calculateTask1" <-
-function(n,t,t2,equallySpacedTimesInput,secondTimeScaleIsUsedInput, BoundsSymmetry, alpha, phi, usedFunction,TruncateBoundsInput)
+function(n,t,t2,equallySpacedTimesInput,secondTimeScaleIsUsedInput, BoundsSymmetry, alpha, phi,
+         usedFunction,TruncateBoundsInput, taskWindow)
 {
   #Initialize Variables
   lowerBounds<-0 # lowerBounds is the vector of lower standardized boundaries
@@ -11,6 +12,7 @@ function(n,t,t2,equallySpacedTimesInput,secondTimeScaleIsUsedInput, BoundsSymmet
 
     if (!BoundsSymmetry==3)
     {
+      usedFunction[2]=usedFunction[1]
       results<- computeBounds(n, 0, alpha[1], phi[1], t, t2, BoundsSymmetry, usedFunction[1], TruncateBoundsInput)
     }
 
@@ -40,7 +42,6 @@ function(n,t,t2,equallySpacedTimesInput,secondTimeScaleIsUsedInput, BoundsSymmet
       probExit <- resultsUpperBounds[[3]] + resultsLowerBounds[[3]]
       probDifference <- resultsUpperBounds[[4]] + resultsLowerBounds[[4]]
     }   
-
 
     ## if (5) Pocock Type - the real Pocock Bounds' was chosen -
     ## we have to do some extra calculations
@@ -113,9 +114,8 @@ function(n,t,t2,equallySpacedTimesInput,secondTimeScaleIsUsedInput, BoundsSymmet
     
   }#end <--*if(whatSpendingFunctionIsUsed[1]==5 || whatSpendingFunctionIsUsed[2]==5)*        
    
-    #output results
-    #outputError<-TRUE
-    guiOutputTask1(n, alpha, t, lowerBounds, upperBounds, probDifference, probExit, BoundsSymmetry, usedFunction)
+    guiOutputTask1(n, alpha, phi, t, lowerBounds, upperBounds, probDifference, probExit,
+                   BoundsSymmetry, usedFunction, taskWindow)
     
         
 }#end <--*function(...)*

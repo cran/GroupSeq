@@ -1,12 +1,12 @@
 "guiInputTask2" <-
-function()
+function(taskWindow)
 {
   
   ### Initialize Variables ###
   #default inputs
   nMax<-25 # Number of interim analyses is limited to 25
   n<-1 # number of interim analyses
-  confidenceLevel<-0.5 # desired power respective confidence level
+  confidenceLevel<-0.8 # desired power respective confidence level
   alphaInput<-0.05 # 'alphaInput' is input of the desired overall size.
   t<-1  # vector containing interim analyses 
   t2<-t # vector containing second time scale - by default t2==t 
@@ -90,12 +90,12 @@ function()
         upperBounds[i]<<-i
       }
       t2<<-t
-      lowerBounds<<-upperBounds
+      lowerBounds<<- -upperBounds
             
       
       #update n in menu bar
       tkdelete(topMenu,0,1)  
-      tkadd(topMenu,"cascade",label=paste("#Interim times: n=",as.character(n)),menu=nMenu)
+      tkadd(topMenu,"cascade",label=paste("#Interim times: K=",as.character(n)),menu=nMenu)
       
       ### equally or unequally spaced times? get it from the checkbox ###
       equallySpacedTimesInput <- as.logical(as.numeric(tclvalue(equallySpacedTimesCheckBoxValue)))
@@ -243,7 +243,10 @@ tkgrid.remove(listOfTimePointLabel.unequalTimes[[i]],listOfEntries.unequalTimes[
   }#end <--*function()*
       
   ##############################################################
-  # function handles a click on checkbox for second time scale #
+  # function handles a click on checkbox for second time scale
+  #
+  # ATTENTION: this feature of a second time scale is currently NOT used!
+  #
   ##############################################################  
   onCheckBoxSecondTimeScale <- function()
   {
@@ -885,7 +888,7 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
             ##################################################
             t2maxPrompt <- function(title,question,entryInit,entryWidth=4,returnValOnCancel="ID_CANCEL")
             {
-          dlg <- tktoplevel()
+          dlg <- tktoplevel(task2)
               tkwm.deiconify(dlg)
               tkgrab.set(dlg)
               tkfocus(dlg)
@@ -981,8 +984,9 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
      
     if(readyForCalculate)
     {
-      calculateTask2(n,nMax,t,t2,t2max,t3,confidenceLevel,drift,equallySpacedTimesInput,secondTimeScaleIsUsedInput, BoundsSymmetry, c(alpha1,alpha2),
-                     c(phi1,phi2), c(function1,function2),TruncateBoundsInput,enterBoundsManually, upperBounds, lowerBounds )
+      calculateTask2(n,nMax,t,t2,t2max,t3,confidenceLevel,drift,equallySpacedTimesInput,secondTimeScaleIsUsedInput,
+                     BoundsSymmetry, c(alpha1,alpha2), c(phi1,phi2), c(function1,function2),TruncateBoundsInput,
+                    enterBoundsManually, upperBounds, lowerBounds, taskWindow )
     }
     else
     {
@@ -999,7 +1003,7 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
 #######################################################################################################  
   
   #Set Toplevel
-  task2 <- tktoplevel()
+  task2 <- tktoplevel(taskWindow)
   tkwm.title(task2,"-2- Compute drift given power and bounds")
   
   #Define main Frame
@@ -1013,7 +1017,7 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   #create pull down menu to select interim analyses from n==1 to n==25(=nMax)
   topMenu <- tkmenu(task2)
   tkconfigure(task2,menu=topMenu)
-  nMenu <- tkmenu(topMenu,tearoff=FALSE,background="grey",activebackground="green")
+  nMenu <- tkmenu(topMenu,tearoff=FALSE,background="grey",activebackground="red")
   tkadd(nMenu,"command",label="1",command=function() onChangeInterimAnalyses(1))
   tkadd(nMenu,"command",label="2",command=function() onChangeInterimAnalyses(2))
   tkadd(nMenu,"command",label="3",command=function() onChangeInterimAnalyses(3))
@@ -1039,7 +1043,7 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   tkadd(nMenu,"command",label="23",command=function() onChangeInterimAnalyses(23))
   tkadd(nMenu,"command",label="24",command=function() onChangeInterimAnalyses(24))
   tkadd(nMenu,"command",label="25",command=function() onChangeInterimAnalyses(25))
-  tkadd(topMenu,"cascade",label=paste("#Interim times: n= ",as.character(n)),menu=nMenu)
+  tkadd(topMenu,"cascade",label=paste("#Interim times: K= ",as.character(n)),menu=nMenu)
   
   tkgrid(tklabel(InputTask2,text="")) # Blank line
    
@@ -1076,7 +1080,7 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   equallyTimesBoxLabel<-tklabel(equallySpacedLabelFrame,text="Equally Spaced Times")
   secondTimesBoxLabel<-tklabel(secondTimesLabelFrame,text="Use Second Time Scale")
   tkgrid(equallyTimesBoxLabel,equallySpacedTimesCheckBox)
-  tkgrid(secondTimesBoxLabel,secondTimeScaleIsUsedCheckBox)
+  # tkgrid(secondTimesBoxLabel,secondTimeScaleIsUsedCheckBox) - this feature is currently removed
   tkgrid(equallySpacedTimesFrame,secondTimesFrame,sticky="n")
   tkgrid(equallySpacedLabelFrame,sticky="n")
   tkgrid(secondTimesLabelFrame,sticky="n")
@@ -1165,8 +1169,8 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   
   ##Default alpha1==0.05, alpha2==0
   alpha1of1 <- tclVar(as.character(alphaInput))
-  alpha1of2 <- tclVar(as.character(alphaInput))
-  alpha2of2 <- tclVar(as.character("0"))
+  alpha1of2 <- tclVar(as.character("0.025"))
+  alpha2of2 <- tclVar(as.character("0.025"))
   
   #########################################################
   ### case symmetric bounds or one-sided test (default) ###
@@ -1184,7 +1188,7 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   functionLabel1of1<-tklabel(functionsFrame1of1,text="What function should be used?")
   listBoxFunction1of1<-tklistbox(functionsFrame1of1,height=5,width=30,selectmode="single",background="grey")
   functionChoice1of1 <- c("(1) O'Brien-Fleming Type","(2) Pocock Type",
-    "(3) Power family: alpha* t^phi","(4) Hwang-Shih-DeCani fammily","(5) Pocock - the real Pocock Bounds")
+    "(3) Power family: alpha* t^phi","(4) Hwang-Shih-DeCani family","(5) Exact Pocock Bounds")
   for (i in (1:5))
   {
     tkinsert(listBoxFunction1of1,"end",functionChoice1of1[i])
@@ -1250,7 +1254,7 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   functionLabel1of2<-tklabel(functionsFrame1of2,text="Choose Function for UPPER Bounds")
   listBoxFunction1of2<-tklistbox(functionsFrame1of2,height=5,width=30,selectmode="single",background="grey")
   functionChoice1of2 <- c("(1) O'Brien-Fleming Type","(2) Pocock Type",
-    "(3) Power family: alpha* t^phi","(4) Hwang-Shih-DeCani fammily","(5) Pocock - the real Pocock Bounds")
+    "(3) Power family: alpha* t^phi","(4) Hwang-Shih-DeCani family","(5) Pocock - the real Pocock Bounds")
   for (i in (1:5))
   {
     tkinsert(listBoxFunction1of2,"end",functionChoice1of2[i])
@@ -1269,7 +1273,7 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   functionLabel2of2<-tklabel(functionsFrame2of2,text="Choose Function for LOWER Bounds")
   listBoxFunction2of2<-tklistbox(functionsFrame2of2,height=5,width=30,selectmode="single",background="grey")
   functionChoice2of2 <- c("(1) O'Brien-Fleming Type","(2) Pocock Type",
-    "(3) Power family: alpha* t^phi","(4) Hwang-Shih-DeCani fammily","(5) Pocock - the real Pocock Bounds")
+    "(3) Power family: alpha* t^phi","(4) Hwang-Shih-DeCani family","(5) Pocock - the real Pocock Bounds")
   for (i in (1:5))
   {
     tkinsert(listBoxFunction2of2,"end",functionChoice2of2[i])
@@ -1343,11 +1347,26 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   
   ##put Overall Frame
   tkgrid(InputTask2)
-  
-  
+
+  #frame for the buttons
+  buttonFrame<-tkframe(task2,relief="groove",borderwidth=0)
+
   #create and put button for calculating
-  calculate.button <-tkbutton(task2,text=" CALCULATE ",command=OnCalculateInputTask1)
-  tkgrid(calculate.button,sticky="we")
+  calculate.button <-tkbutton(buttonFrame,text=" CALCULATE ",command=OnCalculateInputTask1)
+
+  # function handles click onto button to Cancel i.e. close current window
+  onCancel <- function()
+  {
+   tkdestroy(task2)
+  }
+  cancel.button <-tkbutton(buttonFrame,text=" Cancel ",command=onCancel)
+
+  # grid buttons
+  tkgrid( tklabel(buttonFrame, text=""))   #blank line
+  tkgrid(calculate.button, tklabel(buttonFrame, text="            "),
+         cancel.button, sticky="we" )
+  tkgrid( tklabel(buttonFrame, text=""))   #blank line
+  tkgrid(buttonFrame)
   
   tkfocus(task2)
 

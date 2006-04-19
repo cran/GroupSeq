@@ -19,13 +19,35 @@ function()
   OnOKtaskWindow <- function()
   {
     taskChoice <- as.numeric(tkcurselection(listBoxTasks))+1
-    
-    #call according function
-    switch(taskChoice, guiInputTask1(), guiInputTask2(), guiInputTask3(), guiInputTask4() )
-   
+    if(length(taskChoice)<1)
+    {
+     tkmessageBox(message="You must select a task!",icon="error",type="ok")
+    }
+    else
+    {
+     #call according function
+     switch(taskChoice, guiInputTask1(taskWindow), guiInputTask2(taskWindow),
+                       guiInputTask3(taskWindow), guiInputTask4(taskWindow) )
+    }
   }
-  OK.but <-tkbutton(taskWindow,text="   OK   ",command=OnOKtaskWindow)
-  tkgrid(OK.but)
+  
+  quitGroupSeq <- function()
+  {
+   tkdestroy(taskWindow)
+   cat("GroupSeq closed by user.\n\n")
+   return()
+  }
+  
+  OK.button <-tkbutton(taskWindow,text="   Perform Selected Task   ",command=OnOKtaskWindow)
+  Quit.buttton <- tkbutton(taskWindow,text="  QUIT GroupSeq  ",command=quitGroupSeq)
+  
+  # place buttons
+  tkgrid(OK.button)
+  tkgrid(tklabel(taskWindow,text="")) # Blank line
+  tkgrid(Quit.buttton)
+  tkgrid(tklabel(taskWindow,text="")) # Blank line
+  
   tkfocus(taskWindow)
+
 
 }

@@ -1,6 +1,6 @@
 "calculateTask3" <-
 function(n,nMax,t,t2,t2max,t3,drift,equallySpacedTimesInput,secondTimeScaleIsUsed, BoundsSymmetry, alpha, phi, usedFunction,TruncateBoundsInput,
-         enterBoundsManually, upperBounds, lowerBounds)
+         enterBoundsManually, upperBounds, lowerBounds, taskWindow)
 {
   ### did user enter bounds himself? otherwise they must be computed before we can go on with calculating the drift ###
   if(!enterBoundsManually)
@@ -9,6 +9,7 @@ function(n,nMax,t,t2,t2max,t3,drift,equallySpacedTimesInput,secondTimeScaleIsUse
 
     if (!BoundsSymmetry==3)
     {
+      usedFunction[2]=usedFunction[1]
       results<- computeBounds(n, 0, alpha[1], phi[1], t, t2, BoundsSymmetry, usedFunction[1], TruncateBoundsInput)
     }
 
@@ -97,7 +98,8 @@ function(n,nMax,t,t2,t2max,t3,drift,equallySpacedTimesInput,secondTimeScaleIsUse
 
   ##output results from function 'computeAlphaLevel'
   guiOutputTask3(n,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max,
-                   lowerBounds,upperBounds,probStopping,probExceedingUpper,probExceedingLower,BoundsSymmetry,enterBoundsManually,alpha,usedFunction)
+                 lowerBounds,upperBounds,probStopping,probExceedingUpper,probExceedingLower,
+                 BoundsSymmetry,enterBoundsManually,alpha,phi,usedFunction, taskWindow)
                    
    
 

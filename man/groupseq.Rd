@@ -4,13 +4,16 @@
 
 \title{ starts the programm }
 \description{
-This function is used to start the programm where user can choose between a GUI (default e.g. mode=="g") which is recommended
-or if for any reason GUI does not work user can choose interactive mode ( mode=="c") taking place in the cosole of R.
+This function is invoked when the package is loaded into R workspace. It starts the programm
+using a GUI (default i.e. groupseq(mode=="g")) which is recommended. If, for any reason, the gui does not work, 
+user can choose interactive mode by typing groupseq( mode=="c") to work within the R console.
 
-The program itself refers to an earlier Fortran Implementation done by Lan DeMets. I took the skeleton of the program,
-improved code by decomposing it into more functions, improved algorithms which were ok for the fast Fortran but took
-to long in R. I added a GUI for much more convenient and faster working and last but not least results can be saved 
-into simple *.html Files to process with them further on.
+The program itself refers to an earlier Fortran Implementation by Reboussin et al.
+The program was completely recoded in R. Following the maxim of modular programming,
+it was decomposed in various functions. Furthermore, some algorithms could be improved 
+and the application was embedded into a GUI affording much more convenient and faster working.
+Last but not least computation results can be saved into tables of *.html file format 
+to eventually process them further on.
 }
 
 \usage{
@@ -25,19 +28,15 @@ groupseq(mode = chosenMode)
 \details{
 The GUI is build within the Tcl/Tk interface of R. I attended to only use the standard Tcl/Tk package,
 to keep as much compatibility as possible. So you won´t have to install additional Tcl/Tk packages
-which might cause problems sometimes. Moreover the GUI should work on all platforms.
+which might cause problems sometimes. Moreover the GUI should work on all platforms R is running on.
 
-Each task and calculation will open in a new window with possibilty to save results into a *.html File.
-So you are able to multitask and to compare results directly and decide which of them you want to save.
+Each task and calculation result will open in a new window with the possibility to save results into a *.html File.
+Thus, the user may perform multiple tasks e.g. computing and comparing several designs at the same time.
 }
 
 \references{ \url{http://www.biostat.wisc.edu/landemets/} }
 
 \author{ Roman Pahl }
-
-\seealso{ 
-\code{\link{guiMode}}, \code{\link{consoleMode}} 
-}
 
 \examples{
 ## call GUI

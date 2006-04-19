@@ -25,7 +25,7 @@ function(n,alpha,t,lowerBounds,upperBounds,probDifference,probExit,symmetricBoun
 
     ##output names of spending functions that were used
     FunctionNames <- c("O'Brien-Fleming Type","Pocock Type","Power family: alpha* t^phi",
-                       "Hwang-Shih-DeCani fammily","Pocock - the real Pocock Bounds")
+                       "Hwang-Shih-DeCani fammily","Exact Pocock Bounds")
     if(symmetricBoundsYesNo==1)
     {
       cat(FunctionNames[spendingFunctionUsed[1]],"was used as spending Function.","\n")
