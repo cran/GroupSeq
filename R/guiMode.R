@@ -2,14 +2,15 @@
 function()
 {
   require(tcltk)
+  backupScipen <- options(scipen=10)[[1]]
 
   taskWindow<-tktoplevel()
   tkwm.title(taskWindow,"Choose a Task")
   listBoxTasks<-tklistbox(taskWindow,height=4,width=40,selectmode="single",background="white")
   tkgrid(tklabel(taskWindow,text="Select a Task!"))
   tkgrid(listBoxTasks)
-  tasks <- c("-1- Compute bounds","-2- Compute drift given power and bounds",
-    "-3- Compute probabilities given bounds and drift.","-4- Compute confidence interval.")
+  tasks <- c("-1- Compute Bounds.","-2- Compute Drift given Power and Bounds.",
+    "-3- Compute Probabilities given Bounds and Drift.","-4- Compute Confidence Interval.")
   for (i in (1:4))
   {
     tkinsert(listBoxTasks,"end",tasks[i])
@@ -34,6 +35,9 @@ function()
   quitGroupSeq <- function()
   {
    tkdestroy(taskWindow)
+   
+   # restore scipen value
+   options(scipen=backupScipen)
    cat("GroupSeq closed by user.\n\n")
    return()
   }

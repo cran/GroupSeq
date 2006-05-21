@@ -98,7 +98,7 @@ function(n,nMax,t,t2,t2max,t3,confidenceLevel,drift,equallySpacedTimesInput,seco
   if(is.numeric(drift))
   {
     ##we got result - output drift 
-    vectorOfResults <- computeAlphaLevel(n, t3, t2, lowerBounds, upperBounds, drift, nMax)
+    vectorOfResults <- computeAlphaLevel(n, t, t2, lowerBounds, upperBounds, drift, nMax)
     probStopping <- vectorOfResults[[1]]
     probExceedingUpper <- vectorOfResults[[2]]
     probExceedingLower <- vectorOfResults[[3]]

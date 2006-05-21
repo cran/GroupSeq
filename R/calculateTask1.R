@@ -51,7 +51,7 @@ function(n,t,t2,equallySpacedTimesInput,secondTimeScaleIsUsedInput, BoundsSymmet
     ##      mean of the bounds computed by our Pocock spending function. I figured out that 
     ##      in almost every case this is a quite good approximation so far.
     ## (2nd)we compute the probability according to our equal bounds, as we would do, if user
-    ##      had chosen Task-3- at the beginning
+    ##      had chosen Task -3- at the beginning
     ## (3rd)we use Newton Iteration to adjust the bounds in every Iteration until we get the appropriate alpha
     
     if(usedFunction[1]==5 || usedFunction[2]==5)

@@ -16,7 +16,7 @@ function(taskWindow)
   lowerBounds<-0 # vector containing lower bounds
   BoundsSymmetry<-1 # BoundsSymmetry==1 means one-sided bounds, BoundsSymmetry==2 means two-sided symmetric and BoundsSymmetry==3 means asymmetric bounds.
   functionInput<-1 # indicates type I error spending rate function e.g. the function(s) the user choosed
-  Zvalue<-0 # standarized statistic (Z value) at the last analysis
+  Zvalue<-0 # standardized statistic (Z value) at the last analysis
   TruncateBoundsInput<-8 ## here 8 equals infinity 
   
   #some status variables (names are self-explanatory)
@@ -95,7 +95,7 @@ function(taskWindow)
       
       #update n in menu bar
       tkdelete(topMenu,0,1)  
-      tkadd(topMenu,"cascade",label=paste("#Interim times: K=",as.character(n)),menu=nMenu)
+      tkadd(topMenu,"cascade",label=paste("#Interim Times: K=",as.character(n)),menu=nMenu)
       
       ### equally or unequally spaced times? get it from the checkbox ###
       equallySpacedTimesInput <- as.logical(as.numeric(tclvalue(equallySpacedTimesCheckBoxValue)))
@@ -807,7 +807,7 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
         if(interimTimesBad)
         {
           readyForCalculate <- FALSE
-          tkmessageBox(message="Bad interim Times entered - old Times are kept so far! ",icon="error",type="ok")
+          tkmessageBox(message="Bad Interim Times entered - old Times are kept so far! ",icon="error",type="ok")
         }
         ##else take new times
         else
@@ -816,6 +816,13 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
         }
       
     }#end <--*if(equallySpacedTimesInput)* 
+    else
+    {
+     for(i in 1:n)
+     {
+       t[i]<<-i/n
+     }
+    }
     
     ##if user typed in second time scales - get them and
     ##check them to be in intervall(0,1] and in right order
@@ -870,7 +877,7 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
         ##If t[n]=1, t2[n] is maximum of t2. 
         if(t[n]==1)
         {
-         tkmessageBox(title="-4- Compute confidence interval",message="Second Time scale will be used to determine covariances.",icon="info",type="ok")
+         tkmessageBox(title="-4- Compute Confidence Interval",message="Second Time scale will be used to determine covariances.",icon="info",type="ok")
          t2max<<-t2[n] 
          t3<<-t2/t2max
         }
@@ -984,6 +991,8 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
      
     if(readyForCalculate)
     {
+      # second time scale is not used so far --> set t3=t2=t
+      t2<-t; t3<-t
       calculateTask4(n,nMax,t,t2,t2max,t3,confidenceLevel,equallySpacedTimesInput,secondTimeScaleIsUsedInput,
                      BoundsSymmetry, c(alpha1,alpha2), c(phi1,phi2), c(function1,function2),TruncateBoundsInput,
                      enterBoundsManually, upperBounds, lowerBounds, Zvalue, taskWindow)
@@ -1000,7 +1009,7 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   
   #Set Toplevel
   task4 <- tktoplevel(taskWindow)
-  tkwm.title(task4,"-4- Compute confidence interval")
+  tkwm.title(task4,"-4- Compute Confidence Interval")
   
   #Define main Frame
   InputTask4 <- tkframe(task4, relief="groove",borderwidth=2)
@@ -1039,7 +1048,7 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   tkadd(nMenu,"command",label="23",command=function() onChangeInterimAnalyses(23))
   tkadd(nMenu,"command",label="24",command=function() onChangeInterimAnalyses(24))
   tkadd(nMenu,"command",label="25",command=function() onChangeInterimAnalyses(25))
-  tkadd(topMenu,"cascade",label=paste("#Interim times: K= ",as.character(n)),menu=nMenu)
+  tkadd(topMenu,"cascade",label=paste("#Interim Times: K= ",as.character(n)),menu=nMenu)
   
   tkgrid(tklabel(InputTask4,text="")) # Blank line
    
@@ -1090,7 +1099,7 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   ## confidence Intervall replaces last bound with Zvalue 
   ZvalueTclVar<-tclVar(as.character(Zvalue))
   ZvalueFrame <- tkframe(InputTask4,relief="groove",borderwidth=0)
-  ZvalueLabel<-tklabel(ZvalueFrame,text="Enter the standarized statistic (Z value) at the last analysis:")
+  ZvalueLabel<-tklabel(ZvalueFrame,text="Enter the standardized statistic (Z value) at the last analysis:")
   entry.Zvalue <-tkentry(ZvalueFrame,width="6",textvariable=ZvalueTclVar)
   #grid it
   tkgrid(ZvalueLabel,entry.Zvalue, sticky="w")
@@ -1100,7 +1109,7 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   #Desired Power
   powerTclVar<-tclVar(as.character(confidenceLevel))
   powerFrame <- tkframe(InputTask4,relief="groove",borderwidth=0)
-  powerLabel<-tklabel(powerFrame,text="Enter confidence Level - it must be in (0,1) :")
+  powerLabel<-tklabel(powerFrame,text="Enter Confidence Level - it must be in (0,1) :")
   entry.power <-tkentry(powerFrame,width="6",textvariable=powerTclVar)
   #grid it
   tkgrid(powerLabel,entry.power, sticky="w")
@@ -1159,11 +1168,11 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   tkgrid.configure(manualBoundsCheckbox,sticky="w")
   
   #create labels for manual entering and grid alltogether
-  manualBoundsUPPERlabel<-tklabel(manualBoundsUPPERframe.Label,text="Enter UPPER Bounds(standarized)     ")
+  manualBoundsUPPERlabel<-tklabel(manualBoundsUPPERframe.Label,text="Enter UPPER Bounds(standardized)     ")
   tkgrid(manualBoundsUPPERlabel,sticky="w")
   tkgrid(manualBoundsUPPERframe.Label,sticky="w")
   tkgrid(manualBoundsUPPERframe.InputFields,sticky="w")
-  manualBoundsLOWERlabel<-tklabel(manualBoundsLOWERframe.Label,text="Enter LOWER Bounds (standarized)")
+  manualBoundsLOWERlabel<-tklabel(manualBoundsLOWERframe.Label,text="Enter LOWER Bounds (standardized)")
   tkgrid(manualBoundsLOWERlabel,sticky="w")
   tkgrid(manualBoundsLOWERframe.Label,sticky="w")
   tkgrid(manualBoundsLOWERframe.InputFields,sticky="w")
@@ -1196,7 +1205,7 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   functionLabel1of1<-tklabel(functionsFrame1of1,text="What function should be used?")
   listBoxFunction1of1<-tklistbox(functionsFrame1of1,height=5,width=30,selectmode="single",background="grey")
   functionChoice1of1 <- c("(1) O'Brien-Fleming Type","(2) Pocock Type",
-    "(3) Power family: alpha* t^phi","(4) Hwang-Shih-DeCani family","(5) Exact Pocock Bounds")
+    "(3) Power Family: alpha* t^phi","(4) Hwang-Shih-DeCani Family","(5) Exact Pocock Bounds")
   for (i in (1:5))
   {
     tkinsert(listBoxFunction1of1,"end",functionChoice1of1[i])
@@ -1262,7 +1271,7 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   functionLabel1of2<-tklabel(functionsFrame1of2,text="Choose Function for UPPER Bounds")
   listBoxFunction1of2<-tklistbox(functionsFrame1of2,height=5,width=30,selectmode="single",background="grey")
   functionChoice1of2 <- c("(1) O'Brien-Fleming Type","(2) Pocock Type",
-    "(3) Power family: alpha* t^phi","(4) Hwang-Shih-DeCani family","(5) Pocock - the real Pocock Bounds")
+    "(3) Power Family: alpha* t^phi","(4) Hwang-Shih-DeCani Family","(5) Exact Pocock Bounds")
   for (i in (1:5))
   {
     tkinsert(listBoxFunction1of2,"end",functionChoice1of2[i])
@@ -1281,7 +1290,7 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   functionLabel2of2<-tklabel(functionsFrame2of2,text="Choose Function for LOWER Bounds")
   listBoxFunction2of2<-tklistbox(functionsFrame2of2,height=5,width=30,selectmode="single",background="grey")
   functionChoice2of2 <- c("(1) O'Brien-Fleming Type","(2) Pocock Type",
-    "(3) Power family: alpha* t^phi","(4) Hwang-Shih-DeCani family","(5) Pocock - the real Pocock Bounds")
+    "(3) Power Family: alpha* t^phi","(4) Hwang-Shih-DeCani Family","(5) Exact Pocock Bounds")
   for (i in (1:5))
   {
     tkinsert(listBoxFunction2of2,"end",functionChoice2of2[i])
@@ -1345,7 +1354,7 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   entry.truncationValue <-tkentry(TruncateDynamicFrame,width="3",textvariable=boundsTruncation)
     
   #put frames
-  tkgrid(tklabel(TruncateLabelFrame,text="Truncate standarized Bounds?"),TruncateBoundsCheckBox)
+  tkgrid(tklabel(TruncateLabelFrame,text="Truncate standardized Bounds?"),TruncateBoundsCheckBox)
   tkgrid(boundsTruncationLabel,entry.truncationValue,sticky="w")
   tkgrid(TruncateLabelFrame,TruncateDynamicFrame,sticky="w")
   tkgrid(TruncateBoundsFrame,sticky="w")

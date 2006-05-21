@@ -88,7 +88,7 @@ function(n,nMax,t,t2,t2max,t3,confidenceLevel,equallySpacedTimesInput,secondTime
   ##-----------------------------------------------------------##
   ##-Confidence limits from bounds and final statistics value.-##
   ##-----------------------------------------------------------##
-  confidenceIntervall <- computeConfidenceIntervall(confidenceLevel,Zvalue,n,t3,t2,lowerBounds,upperBounds,nMax)
+  confidenceIntervall <- computeConfidenceIntervall(confidenceLevel,Zvalue,n,t,t2,lowerBounds,upperBounds,nMax)
                     
   ##output results 
   guiOutputTask4(n,confidenceLevel,secondTimeScaleIsUsed,t,t2,t2max,lowerBounds,upperBounds,BoundsSymmetry,

@@ -49,8 +49,8 @@ function(K,alpha,phi,t,lowerBounds,upperBounds,probDifference,probExit,
   if(!BoundsSymmetry==3)
   {
     ##names of spending functions that could have been used
-    FunctionNames <- c("O'Brien-Fleming Type","Pocock Type",paste("Power family: alpha*t^",phi[1],sep=""),
-                       paste("Hwang-Shih-DeCani family ( phi =",phi[1],")"),"Exact Pocock Bounds")
+    FunctionNames <- c("O'Brien-Fleming Type","Pocock Type",paste("Power Family: alpha*t^",phi[1],sep=""),
+                       paste("Hwang-Shih-DeCani Family ( phi =",phi[1],")"),"Exact Pocock Bounds")
 
     # substitute according funtion in output
     tkgrid( tklabel(parametersFrame, text=paste("Function: ",FunctionNames[[spendingFunctionUsed[1]]])),sticky="w") 
@@ -58,10 +58,10 @@ function(K,alpha,phi,t,lowerBounds,upperBounds,probDifference,probExit,
   else
   { 
     ##names of spending functions that could have been used
-    FunctionNamesUpper <- c("O'Brien-Fleming Type","Pocock Type",paste("Power family: alpha*t^",phi[1],sep=""),
-                            paste("Hwang-Shih-DeCani family ( phi =",phi[1],")"),"Exact Pocock Bounds")
-    FunctionNamesLower <- c("O'Brien-Fleming Type","Pocock Type",paste("Power family: alpha*t^",phi[2],sep=""),
-                            paste("Hwang-Shih-DeCani family ( phi =",phi[2],")"),"Exact Pocock Bounds")   
+    FunctionNamesUpper <- c("O'Brien-Fleming Type","Pocock Type",paste("Power Family: alpha*t^",phi[1],sep=""),
+                            paste("Hwang-Shih-DeCani Family ( phi =",phi[1],")"),"Exact Pocock Bounds")
+    FunctionNamesLower <- c("O'Brien-Fleming Type","Pocock Type",paste("Power Family: alpha*t^",phi[2],sep=""),
+                            paste("Hwang-Shih-DeCani Family ( phi =",phi[2],")"),"Exact Pocock Bounds")   
 
     # substitute according funtion in output                                             
     tkgrid( tklabel(parametersFrame, text=paste("Function - Upper Bounds: ",FunctionNamesUpper[spendingFunctionUsed[1]])),sticky="w")
@@ -110,7 +110,7 @@ function(K,alpha,phi,t,lowerBounds,upperBounds,probDifference,probExit,
         plot(xCoordinate,yCoordinate,main=paste("-1-  K=",K,
              "\n Function:", FunctionNames[spendingFunctionUsed[1]],", alpha=",round(alpha[1],digits=5), sep=""),
              pch=21,bg="green",font=4,font.axis=4,font.lab=4,font.main=4, cex.main=0.9,
-             xlab="Times",ylab="Standarized Z-Value",ylim=c(0,4))
+             xlab="Times",ylab="Standardized Z-Value",ylim=c(0,4))
 
         ##...then add lines between them
         lines(t,upperBounds,col="blue")
@@ -127,7 +127,7 @@ function(K,alpha,phi,t,lowerBounds,upperBounds,probDifference,probExit,
           plot(xCoordinate,yCoordinate,main=paste("-1-  K=",K,
              "\n Function:", FunctionNames[spendingFunctionUsed[1]],", alpha=",round(alpha[1],digits=5), sep=""),
              pch=21,bg="green",font=4,font.axis=4,font.lab=4,font.main=4, cex.main=0.9,
-             xlab="Times",ylab="Standarized Z-Value",ylim=c(-4,4))
+             xlab="Times",ylab="Standardized Z-Value",ylim=c(-4,4))
         }
         else
         {
@@ -136,7 +136,7 @@ function(K,alpha,phi,t,lowerBounds,upperBounds,probDifference,probExit,
              "\n upper Function:", FunctionNamesUpper[spendingFunctionUsed[1]],", alpha=",round(alpha[1],digits=5),
              "\n lower Function:", FunctionNamesLower[spendingFunctionUsed[2]],", alpha=",round(alpha[2],digits=5),sep=""),
              pch=21,bg="green",font=4,font.axis=4,font.lab=4,font.main=4, cex.main=0.9,
-             xlab="Times",ylab="Standarized Z-Value",ylim=c(-4,4))
+             xlab="Times",ylab="Standardized Z-Value",ylim=c(-4,4))
         }
         
         ##...then add lines between them
@@ -177,8 +177,8 @@ function(K,alpha,phi,t,lowerBounds,upperBounds,probDifference,probExit,
      if(BoundsSymmetry!=3)
      {
        ##output names of spending functions that were used
-       FunctionNames <- c("O'Brien-Fleming Type","Pocock Type",paste("Power family: &alpha;&sdot;t<sup>",phi[1],"</sup>"),
-                        paste("Hwang-Shih-DeCani family ( phi =",phi[1],")"),"Exact Pocock Bounds")
+       FunctionNames <- c("O'Brien-Fleming Type","Pocock Type",paste("Power Family: &alpha;&sdot;t<sup>",phi[1],"</sup>"),
+                        paste("Hwang-Shih-DeCani Family ( phi =",phi[1],")"),"Exact Pocock Bounds")
        
        # substitute according funtion in output
        cat("<b>",FunctionNames[spendingFunctionUsed[1]],"</b>"," was used as spending Function.","<br>\n",file = zz)
@@ -186,10 +186,10 @@ function(K,alpha,phi,t,lowerBounds,upperBounds,probDifference,probExit,
      else
      { 
        ##names of spending functions that could have been used
-       FunctionNamesUpper <- c("O'Brien-Fleming Type","Pocock Type",paste("Power family: &alpha;&sdot;t<sup>",phi[1],"</sup>"),
-                        paste("Hwang-Shih-DeCani family ( phi =",phi[1],")"),"Exact Pocock Bounds")
-       FunctionNamesLower <- c("O'Brien-Fleming Type","Pocock Type",paste("Power family: &alpha;&sdot;t<sup>",phi[2],"</sup>"),
-                        paste("Hwang-Shih-DeCani family ( phi =",phi[2],")"),"Exact Pocock Bounds")                      
+       FunctionNamesUpper <- c("O'Brien-Fleming Type","Pocock Type",paste("Power Family: &alpha;&sdot;t<sup>",phi[1],"</sup>"),
+                        paste("Hwang-Shih-DeCani Family ( phi =",phi[1],")"),"Exact Pocock Bounds")
+       FunctionNamesLower <- c("O'Brien-Fleming Type","Pocock Type",paste("Power Family: &alpha;&sdot;t<sup>",phi[2],"</sup>"),
+                        paste("Hwang-Shih-DeCani Family ( phi =",phi[2],")"),"Exact Pocock Bounds")                      
        
        # substitute according funtion in output                     
        cat("Spending Function for UPPER Bound:","<b>",FunctionNamesUpper[spendingFunctionUsed[1]],"</b>","<br>\n",file = zz)

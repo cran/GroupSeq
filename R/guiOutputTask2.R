@@ -72,8 +72,8 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
     else
     {
       ##names of spending functions that could have been used
-      FunctionNames <- c("O'Brien-Fleming Type","Pocock Type",paste("Power family: alpha*t^",phi[1],sep=""),
-                       paste("Hwang-Shih-DeCani family ( phi =",phi[1],")"),"Exact Pocock Bounds")
+      FunctionNames <- c("O'Brien-Fleming Type","Pocock Type",paste("Power Family: alpha*t^",phi[1],sep=""),
+                       paste("Hwang-Shih-DeCani Family ( phi =",phi[1],")"),"Exact Pocock Bounds")
                        
       # substitute according funtion in output                 
       tkgrid( tklabel(parametersFrame, text=paste("Function: ",FunctionNames[spendingFunctionUsed[1]])),sticky="w") 
@@ -89,10 +89,10 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
     else
     {
       ## names of spending functions that could have been used
-      FunctionNamesUpper <- c("O'Brien-Fleming Type","Pocock Type",paste("Power family: alpha*t^",phi[1],sep=""),
-                              paste("Hwang-Shih-DeCani family ( phi =",phi[1],")"),"Exact Pocock Bounds")
-      FunctionNamesLower <- c("O'Brien-Fleming Type","Pocock Type",paste("Power family: alpha*t^",phi[2],sep=""),
-                              paste("Hwang-Shih-DeCani family ( phi =",phi[2],")"),"Exact Pocock Bounds") 
+      FunctionNamesUpper <- c("O'Brien-Fleming Type","Pocock Type",paste("Power Family: alpha*t^",phi[1],sep=""),
+                              paste("Hwang-Shih-DeCani Family ( phi =",phi[1],")"),"Exact Pocock Bounds")
+      FunctionNamesLower <- c("O'Brien-Fleming Type","Pocock Type",paste("Power Family: alpha*t^",phi[2],sep=""),
+                              paste("Hwang-Shih-DeCani Family ( phi =",phi[2],")"),"Exact Pocock Bounds") 
 
       # substitute according funtion in output
       tkgrid( tklabel(parametersFrame, text=paste("Function - Upper Bounds: ",FunctionNamesUpper[spendingFunctionUsed[1]])),sticky="w")
@@ -118,8 +118,8 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
   tkgrid( tklabel(secondTimesFrame, text="2nd Time Scale   "),sticky="w")
   tkgrid( tklabel(lowerBoundsFrame, text="Lower Bounds  "),sticky="w")
   tkgrid( tklabel(upperBoundsFrame, text="Upper Bounds  "),sticky="w")
-  tkgrid( tklabel(exitProbabilityFrame, text="exit Probability  "),sticky="w")
-  tkgrid( tklabel(cumulativeExitProbFrame, text="cumulative exit Prob  "),sticky="w")
+  tkgrid( tklabel(exitProbabilityFrame, text="Exit Probability  "),sticky="w")
+  tkgrid( tklabel(cumulativeExitProbFrame, text="Cumulative Exit Prob.  "),sticky="w")
 
   #create labels with results
   for(i in 1:K)
@@ -166,7 +166,7 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
         plot(xCoordinate,yCoordinate,main=paste("-2-  K=",K,", drift=",round(drift,digits=5),
              "\n Bounds manually entered", sep=""),
              pch=21,bg="green",font=4,font.axis=4,font.lab=4,font.main=4, cex.main=0.9,
-             xlab="Times",ylab="Standarized Z-Value",ylim=c(0,4))
+             xlab="Times",ylab="Standardized Z-Value",ylim=c(0,4))
 
         ##...then add lines between them
         lines(t,upperBounds,col="blue")
@@ -181,7 +181,7 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
         plot(xCoordinate,yCoordinate,main=paste("-2-  K=",K,", drift=",round(drift,digits=5),
              "\n Bounds manually entered", sep=""),
              pch=21,bg="green",font=4,font.axis=4,font.lab=4,font.main=4, cex.main=0.9,
-             xlab="Times",ylab="Standarized Z-Value",ylim=c(-4,4))
+             xlab="Times",ylab="Standardized Z-Value",ylim=c(-4,4))
 
         ##...then add lines between them
         lines(t,lowerBounds,col="blue")
@@ -201,7 +201,7 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
         plot(xCoordinate,yCoordinate,main=paste("-2-  K=",K,", drift=",round(drift,digits=5),
              "\n Function:", FunctionNames[spendingFunctionUsed[1]],", alpha=",round(alpha[1],digits=5), sep=""),
              pch=21,bg="green",font=4,font.axis=4,font.lab=4,font.main=4, cex.main=0.9,
-             xlab="Times",ylab="Standarized Z-Value",ylim=c(0,4))
+             xlab="Times",ylab="Standardized Z-Value",ylim=c(0,4))
 
         ##...then add lines between them
         lines(t,upperBounds,col="blue")
@@ -218,7 +218,7 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
            plot(xCoordinate,yCoordinate,main=paste("-2-  K=",K,", drift=",round(drift,digits=5),
            "\n Function:", FunctionNames[spendingFunctionUsed[1]],", alpha=",round(alpha[1],digits=5), sep=""),
            pch=21,bg="green",font=4,font.axis=4,font.lab=4,font.main=4, cex.main=0.9,
-           xlab="Times",ylab="Standarized Z-Value",ylim=c(-4,4))
+           xlab="Times",ylab="Standardized Z-Value",ylim=c(-4,4))
          }
          else
          {
@@ -227,7 +227,7 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
              "\n upper Function:", FunctionNamesUpper[spendingFunctionUsed[1]],", alpha=",round(alpha[1],digits=5),
              "\n lower Function:", FunctionNamesLower[spendingFunctionUsed[2]],", alpha=",round(alpha[2],digits=5),sep=""),
              pch=21,bg="green",font=4,font.axis=4,font.lab=4,font.main=4, cex.main=0.9,
-             xlab="Times",ylab="Standarized Z-Value",ylim=c(-4,4))
+             xlab="Times",ylab="Standardized Z-Value",ylim=c(-4,4))
          }
          
          ##...then add lines between them
@@ -257,16 +257,19 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
      cat("K=",K,"<br> \n",file = zz)
      
      ##ouput alpha
-     if(!BoundsSymmetry==3)
-     {
-       cat("&alpha; =",alpha[1],"<br>\n",file = zz)
+     if(!enterBoundsManually)
+     {     
+       if(!BoundsSymmetry==3)
+       {
+         cat("&alpha; =",alpha[1],"<br>\n",file = zz)
+       }
+       else
+       {
+         cat("Upper &alpha; = ",alpha[1],"<br>\n",file = zz)
+         cat("Lower &alpha; = ",alpha[2],"<br>\n",file = zz)
+       } 
      }
-     else
-     {
-       cat("Upper &alpha; = ",alpha[1],"<br>\n",file = zz)
-       cat("Lower &alpha; = ",alpha[2],"<br>\n",file = zz)
-     } 
-
+     
      if(!BoundsSymmetry==3)
      {
        if(enterBoundsManually)
@@ -276,8 +279,8 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
        else
        {
          ##output names of spending functions that were used
-         FunctionNames <- c("O'Brien-Fleming Type","Pocock Type",paste("Power family: &alpha;&sdot;t<sup>",phi[1],"</sup>"),
-                            paste("Hwang-Shih-DeCani family ( phi =",phi[1],")"),"Exact Pocock Bounds")
+         FunctionNames <- c("O'Brien-Fleming Type","Pocock Type",paste("Power Family: &alpha;&sdot;t<sup>",phi[1],"</sup>"),
+                            paste("Hwang-Shih-DeCani Family ( phi =",phi[1],")"),"Exact Pocock Bounds")
        
          # substitute according funtion in output
          cat("<b>",FunctionNames[spendingFunctionUsed[1]],"</b>"," was used as spending Function.","<br>\n",file = zz)
@@ -293,10 +296,10 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
        else
        {
          ##names of spending functions that could have been used
-         FunctionNamesUpper <- c("O'Brien-Fleming Type","Pocock Type",paste("Power family: &alpha;&sdot;t<sup>",phi[1],"</sup>"),
-                           paste("Hwang-Shih-DeCani family ( phi =",phi[1],")"),"Exact Pocock Bounds")
-         FunctionNamesLower <- c("O'Brien-Fleming Type","Pocock Type",paste("Power family: &alpha;&sdot;t<sup>",phi[2],"</sup>"),
-                           paste("Hwang-Shih-DeCani family ( phi =",phi[2],")"),"Exact Pocock Bounds")                      
+         FunctionNamesUpper <- c("O'Brien-Fleming Type","Pocock Type",paste("Power Family: &alpha;&sdot;t<sup>",phi[1],"</sup>"),
+                           paste("Hwang-Shih-DeCani Family ( phi =",phi[1],")"),"Exact Pocock Bounds")
+         FunctionNamesLower <- c("O'Brien-Fleming Type","Pocock Type",paste("Power Family: &alpha;&sdot;t<sup>",phi[2],"</sup>"),
+                           paste("Hwang-Shih-DeCani Family ( phi =",phi[2],")"),"Exact Pocock Bounds")                      
        
          # substitute according funtion in output                     
          cat("Spending Function for UPPER Bound:","<b>",FunctionNamesUpper[spendingFunctionUsed[1]],"</b>","<br>\n",file = zz)
@@ -321,7 +324,7 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
      cat("<td>Times &#160</td> \n" ,file=zz)
      if(secondTimeScaleIsUsed) { cat("<td>2nd Time Scale &#160</td> \n" ,file=zz) }
      cat("<td>Lower Bounds &#160</td>  <td>Upper Bounds &#160</td> \n",file = zz)
-     cat("<td>exit Probability &#160</td>  <td>cumulative exit Prob &#160</td> \n",file = zz)
+     cat("<td>Exit Probability &#160</td>  <td>Cumulative Exit Prob. &#160</td> \n",file = zz)
      cat("</tr> \n",file = zz)
      
      #values
