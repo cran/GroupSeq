@@ -1,26 +1,37 @@
-"groupseq" <-
-function( mode="g" )
-{
-  #default is gui mode
-  if(missing(mode))
-  {
-    guiMode()
-  }
+pkg.env <- new.env(parent=emptyenv())
+pkg.env$taskWindow <- NULL
+pkg.env$scipen.old <- options(scipen=10)[[1]]
 
-  # "c" is console mode
-  else if(mode=="c")
-       {
-         consoleMode()
-       }
-       # "g" is gui mode
-       else if(mode=="g")
-       {
-         guiMode()
-       }
-       else
-       {
-         cat("Wrong call of groupseq() \n")
-       }
+
+groupseq <- function(mode="g")
+{
+    mode <- match.arg(mode)
+    switch(mode,
+           "g" = guiMode(),
+           "c" = consoleMode())
 }
 
-.onAttach <- function(libname, pkgname) {groupseq()}
+.onAttach <- function(libname, pkgname)
+{
+    groupseq()
+}
+
+quitGroupSeq <- function() {
+    if (!is.null(pkg.env$taskWindow)) {
+        tcltk::tkdestroy(pkg.env$taskWindow)
+        pkg.env$taskWindow <- NULL
+    }
+    options(scipen=pkg.env$scipen.old)
+    invisible()
+}
+
+.onUnload <- function(libpath)
+{
+    quitGroupSeq()
+}
+
+.onDetach <- function(libpath)
+{
+    quitGroupSeq()
+}
+
