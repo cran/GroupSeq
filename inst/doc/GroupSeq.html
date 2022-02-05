@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Introduction to GroupSeq</title>
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Introduction to GroupSeq</h1>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#groupseq-menu">GroupSeq menu</a><ul>
+<li><a href="#compute-bounds"><a href="https://rpahl.github.io/GroupSeq/articles/task-1-compute-bounds-H0.html">-1- Compute Bounds</a></a></li>
+<li><a href="#compute-drift-given-power-and-bounds"><a href="https://rpahl.github.io/GroupSeq/articles/task-2-compute-drift.html">-2- Compute Drift given Power and Bounds</a></a></li>
+<li><a href="#compute-probabilities-given-bounds-and-drift"><a href="https://rpahl.github.io/GroupSeq/articles/task-3-compute-bounds-H1.html">-3- Compute Probabilities given Bounds and Drift</a></a></li>
+<li><a href="#compute-confidence-interval"><a href="https://rpahl.github.io/GroupSeq/articles/task-4-compute-CI.html">-4- Compute Confidence Interval</a></a></li>
+</ul></li>
+</ul>
+</div>
+
+<p>Group sequential designs in essence allow to lower the sample size of clinical or other studies. To be clear - if a group sequentially designed study is conducted until the final analysis, that is, without aborting at one of the interim looks, the required sample will be larger compared to a simple single stage study, because you have to &quot;pay&quot; for the added interim analyses to prevent <a href="https://en.wikipedia.org/wiki/Multiple_comparisons_problem">alpha inflation</a>.</p>
+<p>But, from time to time, especially if the underlying effect is strong (e.g. you have a very potent medicine), you will abort the study early and this on average leads to lower sample sizes, or in other words, the expected sample size of group sequential designs is lower than the sample size of comparable studies with just one final analysis.</p>
+<p>If you want to get an intuitive understanding on how probabilities of group sequential designs are calculated, please see the vignette <a href="https://rpahl.github.io/GroupSeq/articles/understanding-gs-designs.html">Understanding group sequential designs</a>.</p>
+<p>The GroupSeq package can be used to perform basic calculations related to group sequential designs. At this point, the functionality is mainly provided via a graphical user interface. The interface was designed such that each calculation can be opened in separate windows allowing to compute and compare arbitrary many designs in parallel.</p>
+<p>The following section gives a brief overview of all the available options with links to further details.</p>
+<div id="groupseq-menu" class="section level3">
+<h3>GroupSeq menu</h3>
+<p>Loading the library opens the main GroupSeq window.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;GroupSeq&quot;</span>)</code></pre></div>
+<p><img src="data:image/png;base64,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" width="35%" /></p>
+<p><br></p>
+<p>The menu lists four possible tasks. To select a task, you have to select a row and hit the <code>Perform Selected Task</code> button. Each task opens in a new window and it's also possible to open multiple windows of the same task in parallel. For a detailed description of the respective task follow one of the links below:</p>
+<div id="compute-bounds" class="section level4">
+<h4><a href="https://rpahl.github.io/GroupSeq/articles/task-1-compute-bounds-H0.html">-1- Compute Bounds</a></h4>
+<p>Use this to compute the boundaries of group sequential designs under the null hypothesis (<code>H0</code>), that is, under a given significance level alpha (usually 5%).</p>
+<table style="border: 0px solid white; border-collapse: collapse; text-align:left">
+<pre><code>&lt;tr&gt;
+    &lt;td&gt;&lt;a href=&quot;https://rpahl.github.io/GroupSeq/articles/task-1-compute-bounds-H0.html&quot;&gt;&lt;img src=&quot;figures/task1-menu.png&quot; alt=&quot;1- Compute Bounds&quot; style=&quot;width:80%&quot;&gt;&lt;/a&gt;&lt;/td&gt;
+    &lt;td&gt;
+        &lt;ul&gt;
+            &lt;li&gt;Computes group sequential bounds under the null hypothesis for given overall significance level.&lt;/li&gt;
+            &lt;li&gt;Bounds can be one- or two-sided or completely asymmetric.&lt;/li&gt;
+            &lt;li&gt;User chooses number of stages and some alpha spending function.&lt;/li&gt;
+        &lt;/ul&gt;    
+    &lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+</table>
+<p><br></p>
+</div>
+<div id="compute-drift-given-power-and-bounds" class="section level4">
+<h4><a href="https://rpahl.github.io/GroupSeq/articles/task-2-compute-drift.html">-2- Compute Drift given Power and Bounds</a></h4>
+<p>Use this to compute the target effect size of a group sequential design, which maintains a certain power (e.g. power = 80%).</p>
+<table style="border: 0px solid white; border-collapse: collapse; text-align:left">
+<pre><code>&lt;tr&gt;
+    &lt;td&gt;&lt;a href=&quot;https://rpahl.github.io/GroupSeq/articles/task-2-compute-drift.html&quot;&gt;&lt;img src=&quot;figures/task2-menu.png&quot; alt=&quot;-2- Compute Drift given Power and Bounds&quot; style=&quot;width:80%&quot;&gt;&lt;/a&gt;&lt;/td&gt;
+    &lt;td&gt;
+        &lt;ul&gt;
+            &lt;li&gt;Computes drift (i.e. standardized effect size) required to achieve desired power of 
+            a given group sequential design.&lt;/li&gt;
+            &lt;li&gt;The group sequential design is defined via alpha spending functions or custom critical bounds.&lt;/li&gt;
+            &lt;li&gt;Bounds can be one- or two-sided or completely asymmetric.&lt;/li&gt;
+            &lt;li&gt;User chooses number of stages.&lt;/li&gt;
+        &lt;/ul&gt;    
+    &lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+</table>
+<p><br></p>
+</div>
+<div id="compute-probabilities-given-bounds-and-drift" class="section level4">
+<h4><a href="https://rpahl.github.io/GroupSeq/articles/task-3-compute-bounds-H1.html">-3- Compute Probabilities given Bounds and Drift</a></h4>
+<p>Use this to compute the power of a group sequential design.</p>
+<table style="border: 0px solid white; border-collapse: collapse; text-align:left">
+<pre><code>&lt;tr&gt;
+    &lt;td&gt;&lt;a href=&quot;https://rpahl.github.io/GroupSeq/articles/3-compute-bounds-H1.html&quot;&gt;&lt;img src=&quot;figures/task3-menu.png&quot; alt=&quot;-3- Compute Probabilities given Bounds and Drift&quot; style=&quot;width:80%&quot;&gt;&lt;/a&gt;&lt;/td&gt;
+    &lt;td&gt;
+        &lt;ul&gt;
+            &lt;li&gt;Computes power that is achieved by a group sequential design
+            given some drift (i.e. standardized effect size).&lt;/li&gt;
+            &lt;li&gt;The group sequential design is defined via alpha spending functions or custom critical bounds.&lt;/li&gt;
+            &lt;li&gt;Bounds can be one- or two-sided or completely asymmetric.&lt;/li&gt;
+            &lt;li&gt;User chooses number of stages.&lt;/li&gt;
+        &lt;/ul&gt;    
+    &lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+</table>
+<p><br></p>
+</div>
+<div id="compute-confidence-interval" class="section level4">
+<h4><a href="https://rpahl.github.io/GroupSeq/articles/task-4-compute-CI.html">-4- Compute Confidence Interval</a></h4>
+<p>Use this to compute the confidence intervals for the target outcome at the final analysis, which can be the last stage as planned or at an earlier stage exceeding the critical bounds and therefore stopping early.</p>
+<table style="border: 0px solid white; border-collapse: collapse; text-align:left">
+<pre><code>&lt;tr&gt;
+    &lt;td&gt;&lt;a href=&quot;https://rpahl.github.io/GroupSeq/articles/task-4-compute-CI.html&quot;&gt;&lt;img src=&quot;figures/task4-menu.png&quot; alt=&quot;-4- Compute Confidence Interval&quot; style=&quot;width:80%&quot;&gt;&lt;/a&gt;&lt;/td&gt;
+    &lt;td&gt;
+        &lt;ul&gt;
+            &lt;li&gt;Compute confidence interval at final analysis stage for given expected effect size.&lt;/li&gt;
+            &lt;li&gt;The group sequential design is defined via alpha spending functions or custom critical bounds.&lt;/li&gt;
+            &lt;li&gt;Bounds can be one- or two-sided or completely asymmetric.&lt;/li&gt;
+            &lt;li&gt;User chooses number of stages and confidence level.&lt;/li&gt;
+        &lt;/ul&gt;    
+    &lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+</table>
+<p><br></p>
+<p>To close the application and, with it, all open windows, just close the main window or hit the <code>QUIT GroupSeq</code> button.</p>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

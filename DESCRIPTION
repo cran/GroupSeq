@@ -1,24 +1,25 @@
 Package: GroupSeq
-Title: A GUI-Based Program to Compute Probabilities Regarding Group
-        Sequential Designs
-Version: 1.3.5
+Title: Group Sequential Design Probabilities - With Graphical User
+        Interface
+Version: 1.4.0
 Authors@R: 
     person("Roman", "Pahl",
     email = "roman.pahl@gmail.com", role = c("aut", "cre"))
-Description: A graphical user interface to compute group sequential designs
-    based on normally distributed test statistics, particularly critical
-    boundaries, power, drift, and confidence intervals of such designs. All
-    computations are based on the alpha spending approach by Lan-DeMets with
-    various alpha spending functions being available to choose among.
-Imports: tcltk
-Suggests: testthat
-License: GPL (>= 2)
-URL: https://github.com/rpahl/GroupSeq
+Description: Computes probabilities related to group sequential designs for
+    normally distributed test statistics. Enables to derive critical
+    boundaries, power, drift, and confidence intervals of such designs.
+    Supports the alpha spending approach by Lan-DeMets.
+Imports: tcltk, tcltk2, mvtnorm, container (>= 1.0.0)
+Suggests: knitr, tinytest, rmarkdown, ggplot2, gridExtra
+VignetteBuilder: knitr
+License: GPL-3
+URL: https://rpahl.github.io/GroupSeq/
 BugReports: https://github.com/rpahl/GroupSeq/issues
 NeedsCompilation: no
 Author: Roman Pahl [aut, cre]
 Maintainer: Roman Pahl <roman.pahl@gmail.com>
 Repository: CRAN
-RoxygenNote: 6.0.1
-Packaged: 2018-04-11 14:37:26 UTC; rp535498
-Date/Publication: 2018-04-11 15:00:32 UTC
+RoxygenNote: 7.1.2
+Encoding: UTF-8
+Packaged: 2022-02-05 22:43:26 UTC; Roman
+Date/Publication: 2022-02-05 23:10:02 UTC
