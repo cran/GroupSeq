@@ -20,11 +20,14 @@ okabe_palette <- c('orange' = "#E69F00",
                    'vermillion' = "#D55E00",
                    'reddish purple' = "#CC79A7")
 
-options(width = 100L, digits = 10)
+old <- options(width = 100L, digits = 10)
 
 ## ---- eval = FALSE, echo = TRUE-------------------------------------------------------------------
 #  library("GroupSeq")
 
 ## ---- out.width = "35%", echo = FALSE-------------------------------------------------------------
 include_graphics("figures/menu-after-load.png")
+
+## ---- include = FALSE---------------------------------------------------------
+options(old)
 

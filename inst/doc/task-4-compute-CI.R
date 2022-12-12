@@ -8,7 +8,7 @@ knitr::opts_chunk$set(
   collapse = T
 )
 
-options(width = 100L)
+old <- options(width = 100L, digits = 10)
 
 ## ---- out.width = "35%", echo = FALSE-------------------------------------------------------------
 include_graphics("figures/task4-two-sided-3-stage-Pocock-setup.png")
@@ -22,4 +22,7 @@ include_graphics("figures/task4-CI-setup.png")
 
 ## ---- out.width = "50%", echo = FALSE-------------------------------------------------------------
 include_graphics("figures/task4-CI-result.png")
+
+## ---- include = FALSE---------------------------------------------------------
+options(old)
 

@@ -21,7 +21,7 @@ okabe_palette <- c('orange' = "#E69F00",
                    'vermillion' = "#D55E00",
                    'reddish purple' = "#CC79A7")
 
-options(width = 100L, digits = 10)
+old <- options(width = 100L, digits = 10)
 
 ## -------------------------------------------------------------------------------------------------
 fill_colors = c(X1 = okabe_palette[["bluish green"]],
@@ -54,7 +54,7 @@ crit = qnorm(1 - 0.025)
 probLabel = paste0(pnorm(-crit)*100, "%")
 x = seq(-3, 3, by = 0.01)
 
-normalDensPlot = 
+normalDensPlot =
     ggplot(data.frame(x = x), aes(x = x)) +
     stat_function(fun = dnorm, geom = "area", fill = blue, xlim = c(-4, -crit)) +
     stat_function(fun = dnorm, geom = "area", fill = yellow, xlim = c(-crit, crit)) +
@@ -65,7 +65,7 @@ normalDensPlot =
     annotate("text", label = probLabel, x = 2.9, y = 0.09, size = 3.5) +
     annotate("text", label = probLabel, x = -2.9, y = 0.09, size = 3.5) +
     lims(x = range(x)) +
-    labs(x = expression(x[1]), 
+    labs(x = expression(x[1]),
          y = expression(f(x[1]))) +
     theme_minimal() +
     theme(panel.grid.major = element_blank(),
@@ -88,7 +88,7 @@ ggplot(dat, aes(x = x, y = y)) +
 
 
 ## ---- fig.width = 8, fig.height = 3, out.width = "85%"--------------------------------------------
-normalDensPlotX2 = normalDensPlot + 
+normalDensPlotX2 = normalDensPlot +
     labs(x = expression(x[2]), y = expression(f(x[2]))) +
     stat_function(fun = dnorm, color = okabe_palette[["vermillion"]], size = 1.5)
 gridExtra::grid.arrange(normalDensPlot, normalDensPlotX2, nrow = 1)
@@ -106,7 +106,7 @@ crit = qnorm(1 - 0.025/2)
 probLabel = paste0(pnorm(-crit)*100, "%")
 x = seq(-3, 3, by = 0.01)
 
-normalDensPlotAdj = 
+normalDensPlotAdj =
     ggplot(data.frame(x = x), aes(x = x)) +
     stat_function(fun = dnorm, geom = "area", fill = blue, xlim = c(-4, -crit)) +
     stat_function(fun = dnorm, geom = "area", fill = yellow, xlim = c(-crit, crit)) +
@@ -117,7 +117,7 @@ normalDensPlotAdj =
     annotate("text", label = probLabel, x = 2.9, y = 0.09, size = 3.5) +
     annotate("text", label = probLabel, x = -2.9, y = 0.09, size = 3.5) +
     lims(x = range(x)) +
-    labs(x = expression(x[1]), 
+    labs(x = expression(x[1]),
          y = expression(f(x[1]))) +
     theme_minimal() +
     theme(panel.grid.major = element_blank(),
@@ -125,7 +125,7 @@ normalDensPlotAdj =
           axis.ticks.x = element_line())
 
 ## ---- fig.width = 8, fig.height = 3, out.width = "85%"--------------------------------------------
-normalDensPlotX2Adj = normalDensPlotAdj + 
+normalDensPlotX2Adj = normalDensPlotAdj +
     labs(x = expression(x[2]), y = expression(f(x[2]))) +
     stat_function(fun = dnorm, color = okabe_palette[["vermillion"]], size = 1.5)
 gridExtra::grid.arrange(normalDensPlotAdj, normalDensPlotX2Adj, nrow = 1)
@@ -191,14 +191,14 @@ calc2Dprob = function(crit, sigma) {
     calc_prob = function(lower, upper) {
         as.numeric(mvtnorm::pmvnorm(lower = lower, upper = upper, sigma = sigma))
     }
-        
+
     left_stripe = calc_prob(lower = c(-Inf, -Inf), upper = c(-crit[1], Inf))
     lower_rectangle = calc_prob(lower = c(-crit[1], -Inf), upper = c(crit[1], -crit[2]))
     2 * left_stripe + 2 * lower_rectangle # return two-sided prob
 }
 
-p.edge = as.numeric(mvtnorm::pmvnorm(lower = c(-Inf, -Inf), 
-                                     upper = c(-crit[1], -crit[2]), 
+p.edge = as.numeric(mvtnorm::pmvnorm(lower = c(-Inf, -Inf),
+                                     upper = c(-crit[1], -crit[2]),
                                      sigma = Sigma0))
 
 
@@ -215,7 +215,7 @@ get_color_edges = Vectorize(function(x1, x2) {
         x1 >  crit[1] && x2 < -crit[2] ||
         x1 >  crit[1] && x2 >  crit[2])
         return("grey")
-    
+
     if (x1 < -crit[1] || x1 > crit[1] || x2 < -crit[2] || x2 > crit[2])
         blue else yellow
 })
@@ -248,7 +248,7 @@ ggplot(dat, aes(x = x, y = y)) +
 
 
 ## ---- fig.width = 8, fig.height = 3, out.width = "85%", fig.cap = "Normal densities for stage 1 and 2 with Bonferroni bounds."----
-normalDensPlotX2Adj = normalDensPlotAdj + 
+normalDensPlotX2Adj = normalDensPlotAdj +
     labs(x = expression(x[2]), y = expression(f(x[2]))) +
     stat_function(fun = dnorm, color = fill_colors[3], size = 1.5)
 gridExtra::grid.arrange(normalDensPlotAdj, normalDensPlotX2Adj, nrow = 1)
@@ -393,4 +393,7 @@ plot_normal_dens_2d(zmat0.5, phi = 90, col = get_color(gc1, gc2), box = FALSE)
 plot_normal_dens_2d(zmat0.7, phi = 90, col = get_color(gc1, gc2), box = FALSE)
 plot_normal_dens_2d(zmat0.9, phi = 90, col = get_color(gc1, gc2), box = FALSE)
 par(op)
+
+## ---- include = FALSE---------------------------------------------------------
+options(old)
 

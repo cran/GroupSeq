@@ -11,7 +11,7 @@ knitr::opts_chunk$set(
   fig.width = 5, fig.height = 5
 )
 
-options(width = 100L)
+old <- options(width = 100L, digits = 10)
 
 ## ---- out.width = "35%", echo = FALSE-------------------------------------------------------------
 include_graphics("figures/task2-menu.png")
@@ -34,4 +34,7 @@ include_graphics("figures/task2-set-manual-bounds.png")
 
 ## ---- out.width = "50%"---------------------------------------------------------------------------
 include_graphics("figures/task2-3stage-Pocock-result-manual-bounds.png")
+
+## ---- include = FALSE---------------------------------------------------------
+options(old)
 

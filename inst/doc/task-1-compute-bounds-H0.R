@@ -11,7 +11,7 @@ knitr::opts_chunk$set(
   fig.width = 5, fig.height = 5
 )
 
-options(width = 100L)
+old <- options(width = 100L, digits = 10)
 
 ## ---- out.width = "35%", echo = FALSE-------------------------------------------------------------
 include_graphics("figures/task1-menu.png")
@@ -57,4 +57,7 @@ include_graphics("figures/task1-3stage-pocock-two-side-asym.png")
 ## ---- out.width = c("55%", "40%"), echo = FALSE,fig.show="hold"-----------------------------------
 include_graphics("figures/task1-3stage-pocock-two-side-asym-result.png")
 include_graphics("figures/task1-3stage-pocock-two-side-asym-graph.png")
+
+## ---- include = FALSE---------------------------------------------------------
+options(old)
 
