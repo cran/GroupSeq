@@ -33,7 +33,7 @@ data  = data.frame(x = c(1:10, 1:10, 1:20),
                    Sample = c(rep("X1", 10), rep("X2", 10), rep("X1+X2", 20))
 )
 
-## ---- out.width = "35%", message = FALSE, fig.height = 1, fig.width = 2.5, fig.align = "center", fig.cap = "Schematic view of a study sample - each circle represents some measurement."----
+## ----out.width = "35%", message = FALSE, fig.height = 1, fig.width = 2.5, fig.align = "center", fig.cap = "Schematic view of a study sample - each circle represents some measurement."----
 dat = data[1:10, ]
 ggplot(dat, aes(x = x, y = y)) +
     geom_point(size = 10, shape = 21, aes(fill = Sample)) +
@@ -43,7 +43,7 @@ ggplot(dat, aes(x = x, y = y)) +
     theme(legend.position = "bottom")
 
 
-## ---- echo = FALSE, out.width = "65%", fig.cap = fig.cap, fig.height=3----------------------------
+## ----echo = FALSE, out.width = "65%", fig.cap = fig.cap, fig.height=3-----------------------------
 fig.cap = "Standard Normal Density with critial bounds marking 5% significance level."
 
 blue = okabe_palette[["sky blue"]]
@@ -74,10 +74,10 @@ normalDensPlot =
 
 normalDensPlot
 
-## ---- echo = TRUE---------------------------------------------------------------------------------
+## ----echo = TRUE----------------------------------------------------------------------------------
 qnorm(0.025)
 
-## ---- out.width = "35%", message = FALSE, fig.height = 1.3, fig.width = 2.5, fig.align = "center"----
+## ----out.width = "35%", message = FALSE, fig.height = 1.3, fig.width = 2.5, fig.align = "center"----
 dat = data[1:20, ]
 ggplot(dat, aes(x = x, y = y)) +
     geom_point(size = 10, shape = 21, aes(fill = Sample)) +
@@ -87,16 +87,16 @@ ggplot(dat, aes(x = x, y = y)) +
     theme(legend.position = "bottom")
 
 
-## ---- fig.width = 8, fig.height = 3, out.width = "85%"--------------------------------------------
+## ----fig.width = 8, fig.height = 3, out.width = "85%"---------------------------------------------
 normalDensPlotX2 = normalDensPlot +
     labs(x = expression(x[2]), y = expression(f(x[2]))) +
     stat_function(fun = dnorm, color = okabe_palette[["vermillion"]], size = 1.5)
 gridExtra::grid.arrange(normalDensPlot, normalDensPlotX2, nrow = 1)
 
-## ---- echo = TRUE---------------------------------------------------------------------------------
+## ----echo = TRUE----------------------------------------------------------------------------------
 qnorm(0.025/2)
 
-## ---- echo = FALSE, out.width = "65%", fig.cap = fig.cap, fig.height=3----------------------------
+## ----echo = FALSE, out.width = "65%", fig.cap = fig.cap, fig.height=3-----------------------------
 fig.cap = "Standard Normal Density with critial bounds marking 5% significance level."
 
 blue = okabe_palette[["sky blue"]]
@@ -124,7 +124,7 @@ normalDensPlotAdj =
           panel.grid.minor = element_blank(),
           axis.ticks.x = element_line())
 
-## ---- fig.width = 8, fig.height = 3, out.width = "85%"--------------------------------------------
+## ----fig.width = 8, fig.height = 3, out.width = "85%"---------------------------------------------
 normalDensPlotX2Adj = normalDensPlotAdj +
     labs(x = expression(x[2]), y = expression(f(x[2]))) +
     stat_function(fun = dnorm, color = okabe_palette[["vermillion"]], size = 1.5)
@@ -175,12 +175,12 @@ plot_normal_dens_2d = function(zmat, ...) {
           ...)
 }
 
-## ---- out.width = "55%"---------------------------------------------------------------------------
+## ----out.width = "55%"----------------------------------------------------------------------------
 op = par(mar = c(0, 2, 0, 0))
 plot_normal_dens_2d(zmat, phi = 45, col = get_color(gc1, gc2))
 par(op)
 
-## ---- include = FALSE-----------------------------------------------------------------------------
+## ----include = FALSE------------------------------------------------------------------------------
 crit.Bonf = -rep(qnorm(alpha.Bonf / 2), 2)
 crit.Sidak = -rep(qnorm(alpha.Sidak / 2), 2)
 
@@ -205,7 +205,7 @@ p.edge = as.numeric(mvtnorm::pmvnorm(lower = c(-Inf, -Inf),
 p2D.Bonf = calc2Dprob(crit.Bonf, sigma = Sigma0)
 p2D.Sidak = calc2Dprob(crit.Sidak, sigma = Sigma0)
 
-## ---- out.width = "55%"---------------------------------------------------------------------------
+## ----out.width = "55%"----------------------------------------------------------------------------
 orange = okabe_palette[["orange"]]
 crit = crit.Sidak
 get_color_edges = Vectorize(function(x1, x2) {
@@ -224,7 +224,7 @@ op = par(mar = c(0, 2, 0, 0))
 plot_normal_dens_2d(zmat, phi = 45, col = get_color_edges(gc1, gc2))
 par(op)
 
-## ---- out.width = "35%", message = FALSE, fig.height = 1.3, fig.width = 2.5, fig.align = "center"----
+## ----out.width = "35%", message = FALSE, fig.height = 1.3, fig.width = 2.5, fig.align = "center"----
 dat = data[1:20, ]
 dat[11:20, "x"] = 11:20
 dat = rbind(data.frame(x = 1:10, y = 1.5, Sample = "X1"), dat)
@@ -236,7 +236,7 @@ ggplot(dat, aes(x = x, y = y)) +
     theme(legend.position = "bottom")
 
 
-## ---- out.width = "35%", message = FALSE, fig.height = 1.3, fig.width = 2.5, fig.align = "center", fig.cap = "Schematic view of group sequential two-stage study."----
+## ----out.width = "35%", message = FALSE, fig.height = 1.3, fig.width = 2.5, fig.align = "center", fig.cap = "Schematic view of group sequential two-stage study."----
 dat = data[c(1:10, 21:40), ]
 
 ggplot(dat, aes(x = x, y = y)) +
@@ -247,7 +247,7 @@ ggplot(dat, aes(x = x, y = y)) +
     theme(legend.position = "bottom")
 
 
-## ---- fig.width = 8, fig.height = 3, out.width = "85%", fig.cap = "Normal densities for stage 1 and 2 with Bonferroni bounds."----
+## ----fig.width = 8, fig.height = 3, out.width = "85%", fig.cap = "Normal densities for stage 1 and 2 with Bonferroni bounds."----
 normalDensPlotX2Adj = normalDensPlotAdj +
     labs(x = expression(x[2]), y = expression(f(x[2]))) +
     stat_function(fun = dnorm, color = fill_colors[3], size = 1.5)
@@ -262,7 +262,7 @@ Sigma = matrix(c(1, rep(covariance, 2), 1), 2)
 z = mvtnorm::dmvnorm(grid, mean = Mean, sigma = Sigma)
 zmat = matrix(z, ncol = length(x1))
 
-## ---- fig.show="hold", out.width = "30%", fig.cap = "Bivariate normal density of two-stage design viewed from different angles."----
+## ----fig.show="hold", out.width = "30%", fig.cap = "Bivariate normal density of two-stage design viewed from different angles."----
 op = par(mar = rep(.1, 4))
 plot_normal_dens_2d(zmat, phi = 40, col = get_color(gc1, gc2), box = FALSE)
 plot_normal_dens_2d(zmat, phi = 65, col = get_color(gc1, gc2), box = FALSE)
@@ -272,17 +272,17 @@ par(op)
 ## -------------------------------------------------------------------------------------------------
 p2D.Bonf = calc2Dprob(crit.Bonf, sigma = Sigma)
 
-## ---- out.width = "40%", echo = FALSE-------------------------------------------------------------
+## ----out.width = "40%", echo = FALSE--------------------------------------------------------------
 include_graphics("figures/two-stage-Pocock-bounds.png")
 
-## ---- out.width = "70%", echo = FALSE-------------------------------------------------------------
+## ----out.width = "70%", echo = FALSE--------------------------------------------------------------
 include_graphics("figures/two-stage-Pocock-bounds-result.png")
 
 ## -------------------------------------------------------------------------------------------------
 crit.Pocock = rep(2.1783, 2)
 p2D.Pocock = calc2Dprob(crit.Pocock, sigma = Sigma)
 
-## ---- echo = FALSE, out.width = "50%", fig.cap = "Group sequential 2-stage Pocock design with one interim look at half of the total samples."----
+## ----echo = FALSE, out.width = "50%", fig.cap = "Group sequential 2-stage Pocock design with one interim look at half of the total samples."----
 n = 100
 tt = c(.5, 1)
 crit = crit.Pocock
@@ -316,7 +316,7 @@ p = ggplot(mapping = aes(x = x, y = y)) +
 
 p
 
-## ---- echo = FALSE, out.width = "50%", fig.cap = "Group sequential 2-stage O'Brien-Fleming design with one interim look at 0.5."----
+## ----echo = FALSE, out.width = "50%", fig.cap = "Group sequential 2-stage O'Brien-Fleming design with one interim look at 0.5."----
 
 asOBF <- function(t, alpha = 0.05, side = 2) {
   2 * (1 - stats::pnorm((stats::qnorm(1 - (alpha / side)/2)) / sqrt(t)))
@@ -358,10 +358,10 @@ p = ggplot(mapping = aes(x = x, y = y)) +
 p
 
 
-## ---- out.width = "70%", echo = FALSE-------------------------------------------------------------
+## ----out.width = "70%", echo = FALSE--------------------------------------------------------------
 include_graphics("figures/two-stage-OBF-bounds-result.png")
 
-## ---- fig.show="hold", out.width = "45%", fig.cap = "Bivariate normal density with critical bounds of Pocock (left) and O'Brien-Fleming design (right) both with interim analysis after 50% of the sample."----
+## ----fig.show="hold", out.width = "45%", fig.cap = "Bivariate normal density with critical bounds of Pocock (left) and O'Brien-Fleming design (right) both with interim analysis after 50% of the sample."----
 op = par(mar = rep(1.5, 4))
 crit = crit.Pocock
 plot_normal_dens_2d(zmat, phi = 80, col = get_color(gc1, gc2))
@@ -369,7 +369,7 @@ crit = crit.OBF
 plot_normal_dens_2d(zmat, phi = 80, col = get_color(gc1, gc2))
 par(op)
 
-## ---- fig.show="hold", out.width = "30%", fig.cap = "Bivariate normal density of two-stage O'Brien-Fleming design with first stage after 50% (left), 70% (middle) and 90% (right) of all samples."----
+## ----fig.show="hold", out.width = "30%", fig.cap = "Bivariate normal density of two-stage O'Brien-Fleming design with first stage after 50% (left), 70% (middle) and 90% (right) of all samples."----
 
 crit = crit.OBF
 mu = 0
@@ -394,6 +394,6 @@ plot_normal_dens_2d(zmat0.7, phi = 90, col = get_color(gc1, gc2), box = FALSE)
 plot_normal_dens_2d(zmat0.9, phi = 90, col = get_color(gc1, gc2), box = FALSE)
 par(op)
 
-## ---- include = FALSE---------------------------------------------------------
+## ----include = FALSE----------------------------------------------------------
 options(old)
 

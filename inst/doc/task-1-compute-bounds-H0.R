@@ -13,51 +13,51 @@ knitr::opts_chunk$set(
 
 old <- options(width = 100L, digits = 10)
 
-## ---- out.width = "35%", echo = FALSE-------------------------------------------------------------
+## ----out.width = "35%", echo = FALSE--------------------------------------------------------------
 include_graphics("figures/task1-menu.png")
 
-## ---- out.width = "50%"---------------------------------------------------------------------------
+## ----out.width = "50%"----------------------------------------------------------------------------
 include_graphics("figures/task1-1stage-result.png")
 
-## ---- echo = TRUE---------------------------------------------------------------------------------
+## ----echo = TRUE----------------------------------------------------------------------------------
 alpha = 0.05
 qnorm(1 - alpha)
 
-## ---- out.width = "25%"---------------------------------------------------------------------------
+## ----out.width = "25%"----------------------------------------------------------------------------
 include_graphics("figures/task1-select-K3.png")
 
-## ---- out.width = "50%"---------------------------------------------------------------------------
+## ----out.width = "50%"----------------------------------------------------------------------------
 include_graphics("figures/task1-3stage-result.png")
 
-## ---- out.width = "50%"---------------------------------------------------------------------------
+## ----out.width = "50%"----------------------------------------------------------------------------
 include_graphics("figures/task1-3stage-result-graph.png")
 
-## ---- out.width = "35%", echo = FALSE-------------------------------------------------------------
+## ----out.width = "35%", echo = FALSE--------------------------------------------------------------
 include_graphics("figures/task1-3stage-pocock.png")
 
-## ---- out.width = c("55%", "40%"), echo = FALSE,fig.show="hold"-----------------------------------
+## ----out.width = c("55%", "40%"), echo = FALSE,fig.show="hold"------------------------------------
 include_graphics("figures/task1-3stage-pocock-result.png")
 include_graphics("figures/task1-3stage-pocock-result-graph.png")
 
-## ---- out.width = "35%", echo = FALSE-------------------------------------------------------------
+## ----out.width = "35%", echo = FALSE--------------------------------------------------------------
 include_graphics("figures/task1-3stage-pocock-custom-times.png")
 
-## ---- out.width = "35%", echo = FALSE-------------------------------------------------------------
+## ----out.width = "35%", echo = FALSE--------------------------------------------------------------
 include_graphics("figures/task1-3stage-pocock-custom-times-entered.png")
 
-## ---- out.width = "50%", echo = FALSE-------------------------------------------------------------
+## ----out.width = "50%", echo = FALSE--------------------------------------------------------------
 include_graphics("figures/task1-3stage-pocock-custom-times-result.png")
 
-## ---- out.width = "35%", echo = FALSE-------------------------------------------------------------
+## ----out.width = "35%", echo = FALSE--------------------------------------------------------------
 include_graphics("figures/task1-3stage-pocock-two-side.png")
 
-## ---- out.width = "35%", echo = FALSE-------------------------------------------------------------
+## ----out.width = "35%", echo = FALSE--------------------------------------------------------------
 include_graphics("figures/task1-3stage-pocock-two-side-asym.png")
 
-## ---- out.width = c("55%", "40%"), echo = FALSE,fig.show="hold"-----------------------------------
+## ----out.width = c("55%", "40%"), echo = FALSE,fig.show="hold"------------------------------------
 include_graphics("figures/task1-3stage-pocock-two-side-asym-result.png")
 include_graphics("figures/task1-3stage-pocock-two-side-asym-graph.png")
 
-## ---- include = FALSE---------------------------------------------------------
+## ----include = FALSE----------------------------------------------------------
 options(old)
 

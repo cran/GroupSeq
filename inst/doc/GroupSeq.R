@@ -22,12 +22,24 @@ okabe_palette <- c('orange' = "#E69F00",
 
 old <- options(width = 100L, digits = 10)
 
-## ---- eval = FALSE, echo = TRUE-------------------------------------------------------------------
+## ----eval = FALSE, echo = TRUE--------------------------------------------------------------------
 #  library("GroupSeq")
 
-## ---- out.width = "35%", echo = FALSE-------------------------------------------------------------
+## ----out.width = "35%", echo = FALSE--------------------------------------------------------------
 include_graphics("figures/menu-after-load.png")
 
-## ---- include = FALSE---------------------------------------------------------
+## ----out.width = "25%", echo = FALSE--------------------------------------------------------------
+include_graphics("figures/task1-menu.png")
+
+## ----out.width = "25%", echo = FALSE--------------------------------------------------------------
+include_graphics("figures/task2-menu.png")
+
+## ----out.width = "25%", echo = FALSE--------------------------------------------------------------
+include_graphics("figures/task3-menu.png")
+
+## ----out.width = "25%", echo = FALSE--------------------------------------------------------------
+include_graphics("figures/task4-menu.png")
+
+## ----include = FALSE----------------------------------------------------------
 options(old)
 
